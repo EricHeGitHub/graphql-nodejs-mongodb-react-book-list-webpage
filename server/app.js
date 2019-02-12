@@ -2,6 +2,7 @@ const express = require('express');
 const graphqlHTTP =  require('express-graphql')
 const schema = require('./schema/schema')
 const mongooes = require('mongoose')
+const cors = require('cors')
 
 mongooes.connect('mongodb://EricGeek:Nmghjw166*900709@ds131905.mlab.com:31905/gql-ninja');
 mongooes.connection.once('open', ()=>{
@@ -10,6 +11,8 @@ mongooes.connection.once('open', ()=>{
 
 var app = express();
 
+// allow cross origin requests
+app.use(cors())
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql:true
